@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+\usepackage[margin=0.75in,tmargin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+
+\title{MATH 3012: Applied Combinatorics}
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhead[L]{MATH 3012: Applied Combinatorics}
+
+\section{Sets}
+The first order of business is a review of basic set principles and notation.
+\subsection{Sets}
+
+A set is a collection of objects. Below are two examples of sets:
+\begin{align*}
+	A &= \{1, 2, 3\} \\
+	B &= \{A, -2.7, ARTICHOKE\}
+\end{align*}
+\begin{itemize}
+	\item The order of elements does not matter
+	\item Repeated elements are not allowed
+\end{itemize}
+The $\emptyset$ symbol denotes the empty set. The empty set is the set containing no elements.\\\\
+Below are some symbols related to sets.
+\begin{itemize}
+	\item
+		$\mathbf{b \in A}$ - element $b$ is a member of set $A$ \\
+		$$1 \in \{1, 2, 3\}$$
+		$$7 \not\in \{1, 2, 3\}$$
+		$$\emptyset \in \{1, 2, 3\}$$
+	\item
+		$\mathbf{A \subseteq B}$ - A is a subset of B (Every element of A is also in B)
+	\item
+		$\mathbf{A \not\subseteq B}$ - A is not a subset of B (There exists an element of A that is not in B
+	\item
+		$\mathbf{\exists}$ - "there exists" \\
+		$$\exists x \in \{7, 8\} \text{ such that } x > 5$$
+	\item
+		$\mathbf{\forall}$ - "for all" \\
+		$$\forall x \in \{7, 8, 9\}, x \geq 4$$
+	\item
+		$\mathbf{B = \{x \in A \mid x > 4\}}$ - An example of set builder notation. "The set containing every element in A that is greater than 4"
+	\item
+		$\mathbf{\cup}$ - Set Union: Elements in either set or both\\
+		$$ \{1, 2, 3, 4\} \cup \{3, 4, 5, 6\} = \{1, 2, 3, 4, 5, 6\} $$
+	\item
+		$\mathbf{\cap}$ - Set Intersection: Elements in both sets\\
+		$$ \{1, 2, 3, 4\} \cap \{3, 4, 5, 6\} = \{3, 4\} $$
+	\item
+		$\mathbf{|A|}$ - Cardinality: The size of a set\\
+		$$ A = \{1, 2, 3, 4\} \qquad |A| = 4$$
+\end{itemize}
+
+	\subsection{The Cartesian Product}
+	The cartesian product is an operation that can be applied to two sets.\\\\
+	\textbf{Example}\\
+	Let $A = \{1, 2\},\quad B = \{3, 4\}$
+	\begin{align*}
+		A \times B &= \{(x, y) \mid x \in A, y \in B\} \\
+		&= \{(1, 3), (1, 4), (2, 3), (2, 4)\} 
+	\end{align*}
+
+	More formally,
+	$$ A_1 \times A_2 \times \cdots \times A_n = \{(a_1, a_2, \ldots, a_n) \mid a_i \in A_i \forall i \in {1, 2, \ldots, n} \} $$
+
+	Notice the elements of the set produced by the cartesian product are contained in parentheses '()' instead of curly brackets '\{\}'. This denotes that they are a tuple. In a tiple, \textbf{order matters} and \textbf{repeates are allowed}.\\\\
+	\textbf{The Product Rule} \\ 
+	$$|A \times B| = |A| \cdot |B|$$
+
+	\section{Counting}
+	\subsection{Fundamental Principles of Counting}
+	\subsubsection{Rule of Sum}
+	If there are $m$ possible choices for a task, and $n$ possible choices for another task, performing either task can be completed in one of $m + n$ ways. \\\\
+	\textbf{Example}\\
+	You can choose either sprinkles or syrup \textbf{but not both} as topping for your ice cream. There are 4 kinds of sprinkles and 3 kinds of syrup. Therefore, there are $4 + 3 = 7$ total different ways to choose a topping for your ice cream.
+	\subsubsection{Rule of Product}
+	If a choice has two stages with $m$ possibilities in the first stage and $n$ possibilities in the second stage, there are $(m)(n)$ total possibilities.\\\\
+	\textbf{Example}\\
+	You are at a restauraunt in Paris about to enjoy a three course meal. There are 3 choices for the appetizer, 4 choices for the main course, and 2 choices for dessert. Therefore, there are $(3)(4)(2) = 24$ different three course meals you are able to enjoy. 
+	\subsection{Permutations}
+	Permutations refer to the counting of possible rearrangements of some number of objects, assuming each object is distinguishable. \\\\
+	Suppose we have 10 differently colored blocks, and we want to find out how many ordered arrangements of 4 blocks we can form.\\\\
+	We can think of choosing each block in stages using the rule of product. We have 10 choices for the first block, 9 choices for the second, 8 for the third, and 7 for the fourth. Therefore, there are $10 * 9 * 8 * 7 = 5040$ possibilities.
+	\begin{align*}
+		10 * 9 * 8 * 7 &= \frac{10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1}{6 * 5 * 4 * 3 * 2 * 1} \\
+		&= \frac{10!}{6!} \\
+		&= \frac{10!}{(10 - 4)!}
+	\end{align*}
+	From this, we can derive a general formula for permutations. $n$ refers to the number of total objects, and $r$ refers to the number of objects we want to form a permutation with.
+	$$P(n, r) = \frac{n!}{(n - r)!}$$
+	\textbf{Example}\\
+	How many ways are there to rearrange the word DATABASES into distinct strings? \\\\
+	We can apply our logic of having 9 choices for the first letter, 8 for the second, ... However, this will \textit{overcount} certain strings, as there exist duplicates letters in the string. Therefore, we need to divide to correct for overcounting. \\\\
+	There are 2 S's in DATABASES, the position of which can be flipped in the rearranged string. Therefore, we must divide by 2. Similarly, there are 3 A's, of which there are $3! = 6$ rearrangements. The number of distinct rearrangements we can create is
+	$$\frac{9!}{3!2!} = 30240$$
+	\subsection{Strings}
+	Let $X$ be a set. A string over the \textit{alphabet} $X$ is a sequence of elements of X (order matters).\\\\
+	\textbf{Example}\\
+	Consider a set Y
+	$$ Y = \{a, b, \ldots, z\} $$
+	The following are examples of strings over Y
+	\begin{itemize}
+		\item (a, b, c, d, e)
+		\item (h, e, l, l, o)
+	\end{itemize}
+	\textbf{Example}\\
+	How many strings of length 6 are there over the alphabet $L = \{a, b, \ldots, z\}$ \textbf{with no repeated characters}? \\\\
+	26 options for postion 1, 25 for position 2, 24 for position 3, ...
+	$$(26)(25)(24)(23)(22)(21)$$
+	More generally, let X be a set with $|X| = n$ and let $k \in \mathbf{N}$ with $k \leq n$ \\
+	The number of strings of length k over X with no repeated characters is
+	\begin{align*}
+		(n)(n - 1)(n - 2)\cdots(n - k + 1) = \frac{n!}{(n - k)!}
+	\end{align*}
+	\subsection{Combinations}
+	Suppose we have 10 differently colored blocks, and we want to find out how many different sets of 4 blocks we can choose from the set of 10 (order doesn't matter).\\\\
+	We could start out by listing out the number of possible combinations.
+	$$ \frac{10!}{(10 - 4)!} $$
+	However, this formula would count each of the following arrangements of blocks (for example) even though they all contain the same 4 colors.
+	\begin{align*}
+		\{R, B,& O, G\}\\
+		\{B, R,& G, O\}\\
+		\{G, O,& R, B\}\\
+		\{O, R,& B, G\}\\
+			   &\vdots
+	\end{align*}
+	We need to correct for overcounting. Notice that there will be $4!$ different ordered arrangements of these same 4 colors. Let's update our formula.
+	$$\frac{10!}{(10 - 4)!4!}$$
+	We divide by $4!$ to account for overcounting, and our formula is now correct.\\\\
+	More generally, there are $$\frac{n!}{(n - k)!k!}$$ ways of choosing a set of k elements from a set of n elements. There exists a special notation for this formula:
+	$${n \choose k} = \frac{n!}{(n - k)! k!}$$
+\end{document}
