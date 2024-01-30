@@ -4,10 +4,16 @@
 \usepackage{amsmath}
 
 \title{MATH 3012: Applied Combinatorics}
+\author{Jaeheon Shim}
+\date{}
 
 \begin{document}
+
 \pagestyle{fancy}
 \fancyhead[L]{MATH 3012: Applied Combinatorics}
+
+\maketitle
+\thispagestyle{fancy}
 
 \section{Sets}
 The first order of business is a review of basic set principles and notation.
@@ -131,4 +137,106 @@ Below are some symbols related to sets.
 	We divide by $4!$ to account for overcounting, and our formula is now correct.\\\\
 	More generally, there are $$\frac{n!}{(n - k)!k!}$$ ways of choosing a set of k elements from a set of n elements. There exists a special notation for this formula:
 	$${n \choose k} = \frac{n!}{(n - k)! k!}$$
+	\textbf{Example}\\
+	How many license plates are there with 6 characters over the alphabet $\{A, \ldots, Z, 0, \ldots, 9\}$ where exactly two characters are numbers and exactly one is a vowel?\\\\
+	There are ${6 \choose 2}$ ways of choosing which two positions are numbers, and after two positions are chosen ${4 \choose 1}$ ways to choose which character is a vowel. There are $10*10$ ways to choose the two numbers, $5$ ways to choose the one vowel, and $21$ ways to choose the remaining 3 consonants.
+	$${6 \choose 2}{4 \choose 1}(10^2)(5)(21^3)$$
+	\textbf{Property}\\
+	${n \choose k} = {n \choose n - k}$\\\\
+	\textbf{Algebraic Proof}
+	\begin{align*}
+		{n \choose k} &= \frac{n!}{(n - k)!k!}\\
+					  &= \frac{n!}{(n-k)!(n - (n - k))!}\\
+					  &= {n \choose n - k}
+	\end{align*}
+	\textbf{Combinatorial Proof}\text{ (More on this later)}\\
+	Suppose we have a club of n people, and we need to choose a team of k people from that club to participate in a competition. How many ways are there to do this? We can either:
+	\begin{enumerate}
+		\item Choose k people from n people ${n \choose k}$
+		\item Choose the $(n - k)$ people who will not make the team ${n \choose n - k}$
+	\end{enumerate}
+	\subsection{Combinatorial Proofs}
+	We can show that some equation holds by showing that the LHS (Left Hand Side) and RHS (Right Hand Side) are just two different ways of counting the same thing.\\\\
+	\textbf{Example}\\
+	If $n = 2k$, where k is a natural number, $2^k \vert n!$ ($2^k$ evenly divides $n!$).\\\\
+	\textbf{Proof}\\
+	Say you have $n$ symbols where there are pairs of interchangeable elements.
+	$$x_1, x_1, x_2, x_2, \ldots x_{n-1}, x_n$$
+	There are $n!$ ways to arrange these symbols, including $2^k$ for every interchangeable pair of elements. Therefore, the number of unique arrangements is equal to 
+	$$\frac{n!}{2^k}$$
+	Since we can apply this method to reduce overcounting, $n!$ is divisible by $2^k$
+	\subsection{Stars and Bars}
+	So far, we've seen counting problems where in order to count something we've had to repeatedly answer the question "how many options are there for what goes here?"\\\\
+	The next counting technique can be best illustrated with an example.\\\\
+	\textbf{Example}\\
+	In how many ways can I distribute 10 \textbf{identical} flowers between Sarah, Erin, and Paul?\\\\
+	We can model our solution as a string over the alphabet $\{\star, \vert\}$ with exactly 10 $\star$'s (representing the 10 flowers and \textbf{2} $\vert$'s, which will divide our 10 flowers into 3 portions. Below is an example of a string describing one scenario in which this can happen:
+	$$\{\star, \star, \star, \vert, \star, \star, \vert, \star, \star, \star, \star, \star\}$$
+	\begin{center}
+		\textit{Sarah gets 3 flowers, Erin gets 2, and Paul gets 5.}
+	\end{center}
+	The question thus becomes, how many strings of length 12 are there over $\{\star, \vert\}$ with exactly 2 $\vert$s? We can choose the locations to place the $\vert$s:
+	$${12 \choose 2}$$
+	\textbf{Generally,} there are ${n + m - 1 \choose m - 1}$ ways of sharing n identical objects among m people.\\\\
+	\textbf{Variations}\\
+	We can be a bit more abstract and use variables instead of characters in a story.
+	$$x_1 + x_2 + x_3 + x_4 = n$$
+	\begin{center}
+		\textit{How many ways are there to distribute n objects among the variables $x_1, x_2, x_3, x_4$?}
+	\end{center}
+	There are also variations on this method:
+	\begin{itemize}
+		\item $x_1 + x_2 + x_3 + x_4 = n$ such that $x_1 \geq 2$ \\
+			$x_1$ must be at least 2, so we set aside 2 for $x_1$ at the beginning, then run stars and bars on the remainder. ${n - 2 + 3 \choose 3}$
+		\item $x_1 + x_2 + x_3 + x_4 \leq n$ \\
+			Imagine adding another variable that can 'absorb' 0 to n elements. Then, $x_1 + x_2 + x_3 + x_4$ are left with the elements that were not absorbed (n to 0). This accounts for the constraint $\leq n$, as now each case for n is considered. \\
+			In essence, rewrite as $x_1 + x_2 + x_3 + x_4 + x_5 = n$ and run stars and bars. ${n + 4 \choose 4}$
+	\end{itemize}
+	\noindent
+	\subsection{Binomial Coefficients}
+	Earlier, we introduced numbers of the form ${n \choose k} = \frac{n!}{(n - k)!k!}$. These numbers are caled "binomial coefficients". Here, we'll see why.
+	\subsubsection{The Binomial Theorem}
+	If $x, y$ are variables and $n$ is a positive integer, then
+	\begin{align*}
+		(x + y)^n &= {n \choose 0}x^0y^n + {n \choose 1}x^1y^{n-1} + {n \choose 2}x^2y^{n-2} \\
+				  &= \ldots + {n \choose n}x^ny^0 \\
+				  &= \sum_{k=0}^{n} {n \choose k}x^ky^{n-k}
+	\end{align*}
+	These numbers appear as the coefficients of this binomial.\\\\
+	\textbf{Proof}\\
+	Note that $(x + y)^n = (x+y)(x+y)\ldots(x+y)$ \\\\
+	For each value of k with $k \in \mathbf{N}$ and $k \leq n$, the simplified expansion of the above product will have a term of the form $c \cdot x^ky^{n-k}$ where c is some constant corresonding to the number of times $x^ky^{n-k}$ appears.\\\\
+	The term $x^ky^{n - k}$ appears once for every possible way to choose k x's from our n factors (and thus $n - k$ y's from our n factors).\\\\
+	\textbf{Example}\\
+	I'm labeling the variables with subscripts so it's more clear how they're distributed when the expansion is performed. There's otherwise nothing special about $x_A$, $x_B$ or $x_C$
+	\begin{align*}
+		(x+y)^3 &= (x_A+y_A)(x_B+y_B)(x_C+y_C) \\
+				&= (x_Ax_B + x_By_A + x_Ay_B + y_Ay_B)(x_C+y_C) \\
+				&= x_Ax_Bx_C + x_By_Ax_C + x_Ay_Bx_C + y_Ay_Bx_C + x_Ax_By_C + y_Ax_By_C + x_Ay_By_C + y_Ay_By_C
+	\end{align*}
+
+	Note that the term $xxy$ appears 3 times, once for every way in which we can choose x from two of the factors above. The two x's can be $x_Ax_B$, $x_Bx_C$, or $x_Ax_C$. \\\\
+	\textbf{Example}\\
+	What is the coefficient of $x^5y^2$ in the expansion of $(x + y)^2$?\\\\
+	The coefficient for $x^kx^{7-k}$ is ${7 \choose k}$. Therefore, the coefficient for $x^{5}y^{7-5}$ is ${7 \choose 5}$.\\\\
+	\textbf{Example}\\
+	What is the coefficient of $a^6b^2$ in the expansion of $(7a-3b)^8$\\\\
+	The binomial coefficient will be ${8 \choose 6}$. Don't forget to count $7^6$ and $(-3)^2$ too. The final answer is ${8 \choose 6}7^63^2$. \\\\
+	This is useful because polynomials can be crafted in such a way that their coefficients are the answers to counting problems. These are called generating functions.
+
+	\subsubsection{The Multinomial Theorem, a generalization of the Binomial Theorem}
+	Let $n, t$ be positive integers and let $n_1, n_2, \ldots, n_t$ be natural numbers with $n_1 + n_2 + \cdots + n_t = n$. The coefficient of $x_1^{n_1}x_2^{n_2} \cdots x_t^{n_t}$ in the expansion of $(x_1 + x_2 + \cdots + x_t)^n$ is $\frac{n!}{n_1!n_2!\cdots n_t!}$ \\\\
+	When $t = 2$, we recover the binomial theorem
+	\begin{align*}
+		n_1 + n_2 &= n \\
+		n_2 &= n - n_1 \\
+		\frac{n!}{n_1!(n - n_1)!} &= {n \choose n_1}
+	\end{align*} 
+	\textbf{Proof} 
+	The proof is very similar to that of the binomial theorem. For $x_1^{n_1}x_2^{n_2} \cdots x_t^{n_t}$, we want the ways in which we can choose which $n_1$ of the $n$ factors contribute $x_1$ to the term, which $n_2$ of the \textbf{remaining} $n - n_1$ factors contribute $x_2$, ... etc.
+	$${n \choose n_1}{n - n_1 \choose n_2}\cdots {n - n_1 - \ldots - n_{t-1} \choose n_t} = \frac{n!}{n_1!n_2!\cdots n_t!}$$
+	\textbf{Notation}
+	Numbers of this form are called multinomial coefficients
+	$${n \choose n_1, n_2, \cdots, n_t} = \frac{n!}{n_1!n_2!\cdots n_t!}$$
+	\section{Induction}
 \end{document}
