@@ -1,0 +1,89 @@
+\documentclass[12pt]{article}
+\usepackage[margin=0.75in,tmargin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\title{MATH 3012: Applied Combinatorics}
+\author{Jaeheon Shim}
+\date{}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhead[L]{MATH 3012: Applied Combinatorics}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Proofs}
+\subsection{Axioms}
+An argument in a proof is either an axiom or rests on an axiom. An axiom is an unproven statement, and different theorems can becom true or false depending on your choice of axioms.\\\\
+The following axioms/assumptions are allowed
+\begin{itemize}
+	\item The rules of algebra \\
+		e.g. if x, y, z are real numbers and $x = y$, then $x + z = y + z$
+	\item The set of integers is closed under addition, multiplication, and subtraction
+	\item Every integer is either even or odd
+	\item If x is an integer, there is no integer between x and x + 1
+	\item The relative order of any two real numbers \\
+		e.g. $\frac{1}{2} < 1$ or $4.2 \geq 3.7$
+	\item The square of any number is greater than or equal to 0
+\end{itemize}
+\subsection{Existential Instantiation}
+A law of logic that says if an object is known to exist, that object can be given a name as long as the name is not currently being used to denote something else. \\\\
+\textbf{Example}\\
+If $n$ is an odd integer, $n = 2k + 1$ for some integer $k$.
+\subsection{Direct Proofs}
+In a direct proof of a conditional statement $p \rightarrow c$, the hypothesis $p$ is assumed to be true and the conclusion $c$ is proven as a direct result of the assumption.
+\begin{center}
+	If n is an odd integer, then $n^2$ is an odd integer.
+\end{center}
+Many theorems also have a universal quantifier such as
+\begin{center}
+	For every integer n, if n is odd then $n^2$ is odd.
+\end{center}
+
+\subsubsection{Example}
+\textbf{Theorem} \quad The square of every odd integer is also odd\\
+\begin{proof}
+	Let $n$ be an odd integer.\\
+	Since $n$ is odd, $n = 2k + 1$ for some integer k. \\
+	Plug $n = 2 + 1$ into $n^2$ to get: \\
+	\begin{align}
+		n^2 &= (2k + 1)^2 \\
+			&= 4k^2 + 4k + 1 \\
+			&= 2(2^2 + 2k) + 1
+	\end{align}
+	Since k is an integer, $2^2 + 2$ is also an integer. \\
+	Since $n^2 = 2m + 1$, where $m = 2k^2 + 2$ is an integer, $n^2$ is odd.
+\end{proof}
+
+\textbf{Two-Column Proof Format} \\
+\begin{tabular}{c|c}
+	n is odd & Assume p. \\
+	$n = 2k + 1$, for some $k \in \mathbf{Z}$ & Definition of Odd \\
+	$n^2 = (2k + 1)^2$ & Square both sides \\
+	$n^2 = 4k^2 + 4k + 1$ & expand $(2k+1)^2$ \\
+	$n^2 = 2(2k^2 + 2k) + 1$ & factor out 2 \\
+	$w = 2k^2 + 2m$ & define new variable \\
+	$w$ is an integer & integers are closed under addition, multiplication, exponentiation \\
+	$n^2 + 2w + 1$, w is integer & substitute w \\
+	$n^2$ is odd & definition of odd \\
+\end{tabular}
+$\therefore$ Therefore, by direct proof, I have shown $p \rightarrow q$
+\subsubsection{Example}
+Prove that, if x and y are squares, then xy is a square \\\\
+p: x and y are squares\\
+q: xy is a square \\
+prove $p \rightarrow q$
+\begin{align*}
+	\text{x and y are square integers} && \text{assume p} \\
+	x = k^2, k \in \mathbf{Z} && \text{definition of square} \\
+	y = j^2, j \in \mathbf{Z} && \text{definition of square} \\
+	xy = k^2n^2 && \text{multiply two equations} \\
+	xy = g^2, g \in \mathbf{Z}
+\end{align*}
+Therefore, by direct proof, I have shown $p \rightarrow q$
+\end{document}

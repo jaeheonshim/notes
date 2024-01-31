@@ -2,6 +2,8 @@
 \usepackage[margin=0.75in,tmargin=1in]{geometry}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 
 \title{MATH 3012: Applied Combinatorics}
 \author{Jaeheon Shim}
@@ -238,5 +240,108 @@ Below are some symbols related to sets.
 	\textbf{Notation}
 	Numbers of this form are called multinomial coefficients
 	$${n \choose n_1, n_2, \cdots, n_t} = \frac{n!}{n_1!n_2!\cdots n_t!}$$
-	\section{Induction}
+	\section{The Principle of Mathematical Induction}
+	Let P(n) be a statement involving some natural number, n.\\\\
+	If:
+	\begin{enumerate}
+		\item P(0) is true
+		\item For every $k \geq 0$, the truth of $P(k)$ implies the truth of $P(k + 1)$, then $P(n)$ is true $\forall n \in \mathbf{N}$
+	\end{enumerate}
+	\begin{align*}
+		&P(0) \rightarrow P(1) \\
+		&P(1) \rightarrow P(2) \\
+		&P(2) \rightarrow P(3) \\
+		&\ldots etc
+	\end{align*}
+	\subsection{The Well-Ordering Principle}
+	\textbf{Induction CANNOT be used to prove things about subets of $\mathbf{R}$}. To use induction to prove statements, the first thing we need to do is prove our statement holds for the smallest element in the set. Not every subset of $\mathbf{R}$ has a smallest element.\\\\
+	The reason we are able to use induction for $\mathbf{N}$ is due to the \textbf{Well-Ordering Principle}. The well-ordering principle states that every nonempty subset of $\mathbf{N}$ has a smallest element.
+	\subsection{Proof of the Principle of Mathematical Induction}
+	Complete Later
+	\subsection{Prove that $\forall n \geq 1, \sum_{j = 1}^n j = \frac{n(n + 1)}{2}$}
+	We proceed by induction on n. \\\\
+	Note that when $n = 1$
+	\begin{align*}
+		\sum_{j = 1}^{1} j &= 1 \\
+						   &= \frac{1(1 + 1)}{2} \\
+	\end{align*}
+	Let $k \geq 1$, and suppose the statement holds when $n = k$. \\\\
+	Let $n = k + 1$
+	\begin{align*}
+		\sum_{j = 1}^{n} j &= \sum_{j = 1}^{k + 1} j \\
+						   &= \left(\sum_{j = 1}^{k} j \right) + (k + 1) \\
+						   &= \frac{k(k + 1)}{2} + (k + 1) \\
+						   &= \frac{k(k + 1) + 2(k + 1)}{2} \\
+						   &= \frac{(k + 1)((k + 1) + 1)}{2}, \text{as desired.}
+	\end{align*}
+	\subsection{Prove that $\forall n \geq 1$  $(n \in \mathbf{N})$, $\sum_{j = 1}^{n} (2j - 1) = n^2$}
+	We proceed by induction on n.\\\\
+	Note that when $n = 1$
+	\begin{align*}
+		\sum_{j = 1}^{1} (2j - 1) = 1
+	\end{align*}
+	Let $k \geq 1$, and suppose the statement holds when $n = k$. \\
+	Let $n = k + 1 $
+	\begin{align*}
+		\sum_{j = 1}^{n} (2j - 1) &= \sum_{j = 1}^{k + 1} (2j - 1) \\
+						   &= \left(\sum_{j = 1}^{k} (2j - 1)\right) + (2(k + 1) - 1)\\
+						   &= k^2 + 2(k + 1) - 1 \\
+						   &= k^2 + 2k + 2 - 1 \\
+						   &= k^2 + 2k + 1 \\
+						   &= (k + 1)^2,\quad \text{as desired.}
+	\end{align*}
+	\subsection{How to write a proof by induction}
+	Say we want to prove a statement $P(n)$ holds for all $n \in \mathbf{N}$ with $n \geq b$. (Typically, $b \in \{0, 1\}$; it's usually the smallest number for which $P(n)$ makes sense.) \\\\
+	Step 1: Establish a base case: prove that $P(b)$ is true. \\
+	Step 2: State the inductive hypothesis.
+
+	\textit{Suppose now $P(k)$ is true for some $k \geq b$.} \\
+	Step 3: Perform the inductive step (i.e. show that $P(k) \rightarrow P(k + 1)$
+	\section{Recursion}
+	\textbf{Definition}\\
+	A sequence of numbers $a_0, a_1, a_2, \ldots$ is recursive if the terms in the sequence are defined using previous terms in the sequence. \\
+	The first few terms, which are not defined using the previous terms, are called the initial conditions\\\\
+	\textbf{Example}\\
+	\begin{align*}
+		b_0 &= 1 \\
+		b_n &= 2b_{n - 1} \forall n \geq 1
+	\end{align*}
+	$$b_0 = 1, b_1 = 2, b_2 = 4, \ldots $$
+	\subsection{Recursion and Counting}
+	Recursive relations can be used as solutions whose terms are the answers to counting problems. \\\\
+	\textbf{Example}\\
+	Let $n \in \mathbf{N}$, and suppose n (straight) lines are drawn in the plane so that
+	\begin{enumerate}
+		\item Every pair of lines crosses
+		\item No three lines cross at a single point.
+	\end{enumerate}
+	Let $r_n$ denote the number of regions the plane is divided into by these lines. \\
+	\includegraphics[scale=0.3]{recursion_counting1}\\
+	\textbf{Solution}\\
+	Suppose we have n lines drawn in the plane (where $n \geq 1$). Focus on one of the lines, L. Notice that L crosses every one of the remaining $n - 1$ lines exactly once, which divides L into exactly $n$ line segments.
+	If we delete L, we have $r_{n - 1}$ regions. \textbf{Each of the n line segments that forms L divides on of these existing regions into two regions}. \\\\
+	It follows that $r_n = r_{n - 1} + n \quad \forall n \geq 1$ and $r_0 = 1$ \\
+	\noindent\rule{\textwidth}{1pt}
+	\textbf{Example}\\
+	We'll call a string over the alphabet $\{0, 1, 2\}$ "good" if it doesn't contain the substring "20" (otherwise we'll say it's "bad"). For all $n \in \mathbf{N}$, let $g_n$ be the number of good strings of length n. Find the recurrence relation and initial conditions for the sequence $g_0, g_1, g_2, \ldots$.\\\\
+	\textbf{Solution}\\
+	Take a good strin of length n, say $s_1s_2\ldots s_n$ \\\\
+	Case 1. The last character $s_n$ is a 1. In this case, note that $s_1s_2\ldots s_{n - 1}$ can be any good string of length $n - 1$. In this case, $s_1s_2\ldots s_{n - 1}$ can be any good string of length $n-1$. There are $g_{n-1}$ of these.\\
+	Case 2. Same as case 1 ("20" cannot be formed at the end) \\
+	Case 3. $s_n = 0$ In this case, $s_{n-1}$ cannot be a 2. $s_1s_2 \ldots s_{n-1}$ can be any good string of length $n-1$ that doesn't end in 2.
+
+	By case 2, there are $g_{n-2}$ good strings of length $n-1$ that end in a 2, and of course there are $g_{n - 1}$ good strings of length $n - 1$. So, there are $g_{n-1} - g_{n-2}$ good strings of length $n-1$ that don't end in a 2.\\\\
+	Sum all of the cases:
+	\begin{align*}
+		g_n &= g_{n - 1} + g_{n - 1} + (g_{n - 1} - g_{n - 2}) \\
+			&= 3g_{n - 1} - g_{n - 2} \forall n \geq 2
+	\end{align*}
+	Initial conditions:
+	\begin{align*}
+		s_0 &= 1 \quad \text{The empty string} \\
+		s_1 &= 3 \quad \text{0, 1, \& 2}
+	\end{align*}
+	\section{The Pigeonhole Principle}
+	If you have $n + 1$ objects, each of which needs to be put into one of $n$ categories, then at least one of the categories will contain at least 2 objects. \\\\
+	A function $f: X \rightarrow Y$ is injective (or 1-to-1) if $\forall x_1, x_2 \in X$, $f(x_1) = f(x_2) \rightarrow x_1 = x_2$. That is, if $f(x_1)$ and $f(x_2)$ map to the same output, their inputs are also the same (i.e. no two distinct inputs get mapped to the same output)
 \end{document}
