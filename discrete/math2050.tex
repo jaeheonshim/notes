@@ -5,14 +5,14 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 
-\title{MATH 3012: Applied Combinatorics}
+\title{CS 2050: Discrete Mathematics for Computer Science}
 \author{Jaeheon Shim}
 \date{}
 
 \begin{document}
 
 \pagestyle{fancy}
-\fancyhead[L]{MATH 3012: Applied Combinatorics}
+\fancyhead[L]{CS 2050: Discrete Mathematics for Computer Science}
 
 \maketitle
 \thispagestyle{fancy}
@@ -86,4 +86,170 @@ prove $p \rightarrow q$
 	xy = g^2, g \in \mathbf{Z}
 \end{align*}
 Therefore, by direct proof, I have shown $p \rightarrow q$
+\subsection{Proof by Contrapositive}
+To prove $p \rightarrow q$, we instead prove $\lnot q \rightarrow \lnot p$
+\subsubsection{Example}
+Prove that, for positive integers n, a, b, if $n = ab$, then $a \leq \sqrt{n}$ or $b \leq \sqrt{n}$
+\begin{align*}
+	\lnot[(a \leq \sqrt{n}) \text{or} (b \leq \sqrt{n})] \rightarrow \lnot(n = ab) \\
+	a > \sqrt{n} \text{ and } b > \sqrt{n} && \text{assume } \lnot q \\
+	a \cdot b > \sqrt{n}\sqrt{n} && \text{multiply inequalities}\\
+	ab > n && \text{algebra} \\
+	ab \neq n && \text{definition of >}
+\end{align*}
+Therefore, we have proven the contrapositive, so the original statement is true.
+\subsection{Proof by Contradiction}
+To prove \textbf{R}
+\begin{enumerate}
+	\item Assume you are wrong (\textbf{R} is false)
+	\item Show that eventually, \textbf{R} being false leads to some absurdity (e.g. that $1 = 2$, or that p and not p are both simultaneously, etc.)
+\end{enumerate}
+\subsection{Example}
+Prove $\sqrt{2}$ is irrational. \\\\
+\textbf{Proof by Contradiction} \\
+\begin{align*}
+	\sqrt{2} \text{ is rational} && \text{assume negation of original statement} \\
+	\sqrt{2} = \frac{a}{b}, a \in \mathbf{Z}, b \in \mathbf{Z}, b \neq 0 && \text{definition of rational} \\
+																		 && \text{Let } \frac{a}{b} \text{ be the most simplified fraction for } \sqrt{2} \\ 
+	2 = \left(\frac{a}{b}\right)^2 && \text{square both sides} \\
+	2 = \frac{a^2}{b^2} \\
+	2b^2 = a^2 && \text{multiply both sides by }b^2 \\
+	a^2 \text{ is even} && \text{by the definition of even} \\
+	a \text{ is even} && \text{proven previously} \\
+	a = 2k, k \in \mathbf{Z} && \text{definition of even} \\
+	a^2 = 4k^2 && \text{square both sides} \\
+	2b^2 = 4k^2 && \text{substitute} \\
+	b^2 = 2k^2 && \text{divide both sides by 2} \\
+	k^2 \text{ is an integer} && \text{closure of } \mathbf{Z} \\
+	b^2 \text{ is even} && \text{definition of even} \\
+	b \text{ is even} && \text{proven previously}
+\end{align*}
+If $a$ and $b$ are not both even, then $\frac{a}{b}$ is not the most simplified form, therefore we have a contradiction. So our original assumption, that $\sqrt{2}$ is rational, is wrong. It must be the case that $\sqrt{2}$ is irrational.
+\subsection{Proof by Cases}
+Split the domain into cases and prove each case. The cases must cover the entire domain.
+\section{Sets}
+A set is an unordered collection of distinct objects. Below is an excerpt from my MATH 3012 notes regarding sets.
+\subsection{Set Basics}
+
+A set is a collection of objects. Below are two examples of sets:
+\begin{align*}
+	A &= \{1, 2, 3\} \\
+	B &= \{A, -2.7, ARTICHOKE\}
+\end{align*}
+\begin{itemize}
+	\item The order of elements does not matter
+	\item Repeated elements are not allowed
+\end{itemize}
+The $\emptyset$ symbol denotes the empty set. The empty set is the set containing no elements.\\\\
+Below are some symbols related to sets.
+\begin{itemize}
+	\item
+		$\mathbf{b \in A}$ - element $b$ is a member of set $A$ \\
+		$$1 \in \{1, 2, 3\}$$
+		$$7 \not\in \{1, 2, 3\}$$
+		$$\emptyset \in \{1, 2, 3\}$$
+	\item
+		$\mathbf{A \subseteq B}$ - A is a subset of B (Every element of A is also in B)
+	\item
+		$\mathbf{A \not\subseteq B}$ - A is not a subset of B (There exists an element of A that is not in B
+	\item
+		$\mathbf{\exists}$ - "there exists" \\
+		$$\exists x \in \{7, 8\} \text{ such that } x > 5$$
+	\item
+		$\mathbf{\forall}$ - "for all" \\
+		$$\forall x \in \{7, 8, 9\}, x \geq 4$$
+	\item
+		$\mathbf{B = \{x \in A \mid x > 4\}}$ - An example of set builder notation. "The set containing every element in A that is greater than 4"
+	\item
+		$\mathbf{\cup}$ - Set Union: Elements in either set or both\\
+		$$ \{1, 2, 3, 4\} \cup \{3, 4, 5, 6\} = \{1, 2, 3, 4, 5, 6\} $$
+	\item
+		$\mathbf{\cap}$ - Set Intersection: Elements in both sets\\
+		$$ \{1, 2, 3, 4\} \cap \{3, 4, 5, 6\} = \{3, 4\} $$
+	\item
+		$\mathbf{|A|}$ - Cardinality: The size of a set\\
+		$$ A = \{1, 2, 3, 4\} \qquad |A| = 4$$
+\end{itemize}
+
+	\subsection{The Cartesian Product}
+	The cartesian product is an operation that can be applied to two sets.\\\\
+	\textbf{Example}\\
+	Let $A = \{1, 2\},\quad B = \{3, 4\}$
+	\begin{align*}
+		A \times B &= \{(x, y) \mid x \in A, y \in B\} \\
+		&= \{(1, 3), (1, 4), (2, 3), (2, 4)\} 
+	\end{align*}
+
+	More formally,
+	$$ A_1 \times A_2 \times \cdots \times A_n = \{(a_1, a_2, \ldots, a_n) \mid a_i \in A_i \forall i \in {1, 2, \ldots, n} \} $$
+
+	Notice the elements of the set produced by the cartesian product are contained in parentheses '()' instead of curly brackets '\{\}'. This denotes that they are a tuple. In a tiple, \textbf{order matters} and \textbf{repeates are allowed}
+
+	\subsection{Set Proofs}
+	\subsubsection{Proving $x \in A \rightarrow x \in B$}
+	Can be proven by conventional methods (direct proof, contrapositive, etc.)
+	\subsubsection{Proving $A \subset B$}
+	\begin{enumerate}
+		\item Prove $A \subseteq B$
+		\item Prove $A \neq B$
+	\end{enumerate}
+	\textbf{Disproving}\\
+	Either show $A \nsubseteq B$ or $A = B$. There is an element in A that is not in B, or vice versa.
+	\subsubsection{Proving $A = B$}
+	You need to prove that $A \subseteq B$ AND $B \subseteq A$
+	\begin{enumerate}
+		\item Prove $x \in A \rightarrow x \in B$ ($A \subseteq B$)
+		\item Prove $x \in B \rightarrow x \in A$ ($B \subseteq A$)
+	\end{enumerate}
+	\subsubsection{Proof of transitivty of $\subset$}
+	It is true that $A \subset B, B \subset D \rightarrow A \subset D$ \\
+	\textbf{Direct Proof}\\
+	Assume $A \subset B, B \subset D$
+	\begin{enumerate}
+		\item $x \in A \rightarrow x \in D \quad (A \subset D) $
+			\begin{enumerate}
+				\item $x \in A$ \qquad assumption
+				\item $x \in A \rightarrow x \in B$ \qquad (defn of $A \subset B$)
+				\item $x \in B$ \qquad modus ponens
+				\item $x \in B \rightarrow x \in D$ (defn of $B \subset D$)
+				\item $x \in D$ \qquad modus ponens
+			\end{enumerate}
+		\item $A \neq D$ \\
+			We assume $B \subset D$. Let $q$ be something in D but not in B. Can q be in A? No, because $A \subseteq B$. (So if it was in A it would also HAVE to be in B).
+	\end{enumerate}
+	\section{Functions}
+	$f: A \rightarrow B$ \qquad f is a function from A to B \\
+	$f(a) = b$ \qquad f assigns b to a \\
+	$A$ is the domain of f \\
+	$B$ is the codomain (the range is not the codomain) \\\\
+	\textbf{To be a well defined function, each preimage must be assigned exactly one image}
+	\begin{itemize}
+		\item preimage: a in $f(a) = b$
+		\item image: b in $f(a) = b$
+	\end{itemize}
+	Is square root a well defined function?
+	$$\sqrt{25} = 5 \qquad \sqrt{25} = -5$$
+	It depends on what domain and codomain you give it. We can disallow negative outputs (principal square root), in which case the square root function is well defined.
+	\subsection{Combining functions}
+	If $f$ and $g$ are functions with the same domain and codomain, we can define things like
+	$$f(x) + g(x) \qquad f(x) \cdot g(x) \qquad f(x) \circ g(x) = f(g(x))$$
+	\subsection{Properties of functions}
+	There are 3 properties of functions we would like to define
+	\begin{itemize}
+		\item One-to-One (Injection) \\
+			A function is one-to-one if "different inputs have different outputs". $\forall a \forall b(f(a) = f(b) \rightarrow a = b)$. Multiple different inputs do not map to the same input. \\\\
+			Is $x \mapsto x^2$ one-to-one? It depends on the domain. For $\mathbb{Z}$, no (e.g. 7 and -7 both map to 49). For $\mathbb{N}$, yes. \\\\
+			\textbf{Examples of functions}
+			\begin{itemize}
+				\item $x \mapsto x^0$ Not one-to-one: everything maps to 1
+				\item $x \mapsto -x$ One-to-one: No way for two different real numbers to map to same negative
+				\item $x \mapsto |x|$ Not one-to-one: e.g. 5 and -5 both map to 5
+				\item $x \mapsto \frac{1}{x}$ One-to-one
+				\item $S \mapsto P(S)$ One-to-one
+				\item $S \mapsto |S|$ Not one-to-one (two sets can have the same size without having the same elements
+				\item $S \mapsto S^c$ One-to-one
+			\end{itemize}
+			
+	\end{itemize}
+	
 \end{document}
